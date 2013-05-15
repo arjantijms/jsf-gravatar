@@ -1,10 +1,12 @@
 package de.proskor.gravatar;
 
+import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponentBase;
 
+@FacesComponent("de.proskor.gravatar.Gravatar")
 public class Gravatar extends UIComponentBase {
+
 	public static final String COMPONENT_FAMILY = "de.proskor.gravatar";
-	public static final String BASE_URL = "http://www.gravatar.com/avatar/";
 	public static final int DEFAULT_SIZE = 80;
 
 	@Override
@@ -34,9 +36,5 @@ public class Gravatar extends UIComponentBase {
 
 	public void setDefault(String value) {
 		getStateHelper().put("default", value);
-	}
-
-	public String getHash() {
-		return GravatarUtils.getInstance().getHash(getEmail());
 	}
 }
