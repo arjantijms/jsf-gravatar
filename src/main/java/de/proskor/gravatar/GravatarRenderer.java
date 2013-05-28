@@ -10,7 +10,7 @@ import javax.faces.render.Renderer;
 
 @FacesRenderer(rendererType = "de.proskor.gravatar.GravatarRenderer", componentFamily = "de.proskor.gravatar")
 public class GravatarRenderer extends Renderer {
-	
+
 	private final GravatarUtils gravatarUtils = GravatarUtils.getInstance();
 
 	@Override
@@ -22,7 +22,7 @@ public class GravatarRenderer extends Renderer {
 	public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
 		ResponseWriter writer = context.getResponseWriter();
 		Gravatar gravatar = (Gravatar) component;
-		
+
 		String url = GravatarUtils.BASE_URL + gravatarUtils.getHash(gravatar.getEmail()) + "?d=" + gravatar.getDefault();
 
 		int size = gravatar.getSize();
@@ -40,6 +40,7 @@ public class GravatarRenderer extends Renderer {
 		writer.writeURIAttribute("src", url, null);
 		writer.writeAttribute("width", size, null);
 		writer.writeAttribute("height", size, null);
+		writer.writeAttribute("alt", "", null);
 
 		writer.endElement("img");
 	}
