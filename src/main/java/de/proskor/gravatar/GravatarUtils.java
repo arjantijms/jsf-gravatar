@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class GravatarUtils {
 
-	public static final String BASE_URL = "http://www.gravatar.com/avatar/";
+	public static final String BASE_URL = "//www.gravatar.com/avatar/";
 	private static GravatarUtils instance;
 
 	private MessageDigest md5Digest;
