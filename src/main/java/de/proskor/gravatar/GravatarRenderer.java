@@ -1,6 +1,10 @@
 package de.proskor.gravatar;
 
+import static de.proskor.gravatar.GravatarUtils.BASE_URL;
+import static de.proskor.gravatar.GravatarUtils.getHash;
+
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -8,10 +12,10 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 import javax.faces.render.Renderer;
 
-@FacesRenderer(rendererType = "de.proskor.gravatar.GravatarRenderer", componentFamily = "de.proskor.gravatar")
+@FacesRenderer(rendererType = GravatarRenderer.RENDERER_TYPE, componentFamily = Gravatar.COMPONENT_FAMILY)
 public class GravatarRenderer extends Renderer {
 
-	private final GravatarUtils gravatarUtils = GravatarUtils.getInstance();
+	public static final String RENDERER_TYPE = "de.proskor.gravatar.GravatarRenderer";
 
 	@Override
 	public boolean getRendersChildren() {
@@ -23,9 +27,9 @@ public class GravatarRenderer extends Renderer {
 		ResponseWriter writer = context.getResponseWriter();
 		Gravatar gravatar = (Gravatar) component;
 
-		String url = GravatarUtils.BASE_URL + gravatarUtils.getHash(gravatar.getEmail()) + "?d=" + gravatar.getDefault();
-
+		String url = BASE_URL + getHash(gravatar.getEmail()) + "?d=" + URLEncoder.encode(gravatar.getDefault(), "UTF-8");
 		int size = gravatar.getSize();
+
 		if (size != Gravatar.DEFAULT_SIZE) {
 			url += "&s=" + size;
 		}
@@ -33,9 +37,11 @@ public class GravatarRenderer extends Renderer {
 		writer.startElement("img", gravatar);
 
 		String styleClass = (String) gravatar.getAttributes().get("styleClass");
+
 		if (styleClass != null) {
 			writer.writeAttribute("class", styleClass, "class");
 		}
+
 		writer.writeAttribute("id", gravatar.getClientId(), "id");
 		writer.writeURIAttribute("src", url, null);
 		writer.writeAttribute("width", size, null);
@@ -44,4 +50,5 @@ public class GravatarRenderer extends Renderer {
 
 		writer.endElement("img");
 	}
+
 }
