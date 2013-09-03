@@ -1,7 +1,5 @@
 package de.proskor.gravatar;
 
-import static javax.xml.bind.DatatypeConverter.printHexBinary;
-
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -16,7 +14,7 @@ public final class GravatarUtils {
 
 	public static String getHash(String email) {
 		try {
-			return printHexBinary(MessageDigest.getInstance("MD5").digest(email.getBytes("UTF-8")));
+			return hex(MessageDigest.getInstance("MD5").digest(email.getBytes("UTF-8")));
 		}
 		catch (NoSuchAlgorithmException e) {
 			// should not happen
@@ -25,6 +23,16 @@ public final class GravatarUtils {
 			// should not happen
 		}
 		return null;
+	}
+
+	private static String hex(byte[] array) {
+		StringBuilder hexBuilder = new StringBuilder();
+
+		for (byte element : array) {
+			hexBuilder.append(Integer.toHexString((element & 0xFF) | 0x100).substring(1, 3));
+		}
+
+		return hexBuilder.toString();
 	}
 
 }
