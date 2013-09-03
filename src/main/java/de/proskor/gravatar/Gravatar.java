@@ -8,6 +8,7 @@ public class Gravatar extends UIComponentBase {
 
 	public static final String COMPONENT_TYPE = "de.proskor.gravatar.Gravatar";
 	public static final String COMPONENT_FAMILY = "de.proskor.gravatar";
+	public static final String DEFAULT_IMAGE = "mm";
 	public static final int DEFAULT_SIZE = 80;
 
 	@Override
@@ -23,6 +24,14 @@ public class Gravatar extends UIComponentBase {
 		getStateHelper().put("email", value);
 	}
 
+	public String getDefault() {
+		return (String) getStateHelper().eval("default", DEFAULT_IMAGE);
+	}
+
+	public void setDefault(String value) {
+		getStateHelper().put("default", value);
+	}
+
 	public int getSize() {
 		return (Integer) getStateHelper().eval("size", DEFAULT_SIZE);
 	}
@@ -31,12 +40,20 @@ public class Gravatar extends UIComponentBase {
 		getStateHelper().put("size", value);
 	}
 
-	public String getDefault() {
-		return (String) getStateHelper().eval("default", "mm");
+	public String getTooltip() {
+		return (String) getStateHelper().eval("tooltip");
 	}
 
-	public void setDefault(String value) {
-		getStateHelper().put("default", value);
+	public void setTooltip(String tooltip) {
+		getStateHelper().put("tooltip", tooltip);
+	}
+
+	public String getStyleClass() {
+		return (String) getStateHelper().eval("styleClass");
+	}
+
+	public void setStyleClass(String styleClass) {
+		getStateHelper().put("styleClass", styleClass);
 	}
 
 }

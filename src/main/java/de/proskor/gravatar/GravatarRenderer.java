@@ -35,18 +35,23 @@ public class GravatarRenderer extends Renderer {
 		}
 
 		writer.startElement("img", gravatar);
+		writer.writeAttribute("id", gravatar.getClientId(), "id");
+		writer.writeURIAttribute("src", url, "email");
+		writer.writeAttribute("width", size, "size");
+		writer.writeAttribute("height", size, "size");
+		writer.writeAttribute("alt", " ", "alt");
 
-		String styleClass = (String) gravatar.getAttributes().get("styleClass");
+		String tooltip = gravatar.getTooltip();
 
-		if (styleClass != null) {
-			writer.writeAttribute("class", styleClass, "class");
+		if (tooltip != null) {
+			writer.writeAttribute("tooltip", tooltip, "tooltip");
 		}
 
-		writer.writeAttribute("id", gravatar.getClientId(), "id");
-		writer.writeURIAttribute("src", url, null);
-		writer.writeAttribute("width", size, null);
-		writer.writeAttribute("height", size, null);
-		writer.writeAttribute("alt", "", null);
+		String styleClass = gravatar.getStyleClass();
+
+		if (styleClass != null) {
+			writer.writeAttribute("class", styleClass, "styleClass");
+		}
 
 		writer.endElement("img");
 	}
