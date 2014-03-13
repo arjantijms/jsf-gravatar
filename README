@@ -5,3 +5,12 @@ Example
 
 <gr:avatar xmlns:gr="http://www.gravatar.com/avatar" email="foo@example.com" size="128" />
 
+Deferred image loading
+----------------------
+
+If you want to use deferred image loading, please make sure you have included jQuery and 
+the following Javascript:
+
+$("img[data-defer-src]").each(function() {
+	$(this).attr('src', $(this).attr("data-defer-src"));
+});

@@ -56,4 +56,12 @@ public class Gravatar extends UIComponentBase {
 		getStateHelper().put("styleClass", styleClass);
 	}
 
+	public boolean isDeferred() {
+		return (Boolean) getStateHelper().eval("deferred", false);
+	}
+
+	public void setDeferred(boolean deferred) {
+		getStateHelper().put("deferred", deferred);
+	}
+
 }
