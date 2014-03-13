@@ -36,7 +36,11 @@ public class GravatarRenderer extends Renderer {
 
 		writer.startElement("img", gravatar);
 		writer.writeAttribute("id", gravatar.getClientId(), "id");
-		writer.writeURIAttribute("src", url, "email");
+		if (gravatar.isDeferred()) {
+			writer.writeURIAttribute("data-defer-src", url, "email");
+		} else {
+			writer.writeURIAttribute("src", url, "email");
+		}
 		writer.writeAttribute("width", size, "size");
 		writer.writeAttribute("height", size, "size");
 		writer.writeAttribute("alt", " ", "alt");
