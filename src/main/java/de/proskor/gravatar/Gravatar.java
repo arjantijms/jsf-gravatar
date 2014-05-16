@@ -8,6 +8,7 @@ public class Gravatar extends UIComponentBase {
 
 	public static final String COMPONENT_TYPE = "de.proskor.gravatar.Gravatar";
 	public static final String COMPONENT_FAMILY = "de.proskor.gravatar";
+	public static final String BASE_URL = "//www.gravatar.com/avatar/";
 	public static final String DEFAULT_IMAGE = "mm";
 	public static final int DEFAULT_SIZE = 80;
 

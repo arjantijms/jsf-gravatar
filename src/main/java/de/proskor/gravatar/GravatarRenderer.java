@@ -1,10 +1,8 @@
 package de.proskor.gravatar;
 
-import static de.proskor.gravatar.GravatarUtils.BASE_URL;
-import static de.proskor.gravatar.GravatarUtils.getHash;
+import static de.proskor.gravatar.GravatarUtils.getURL;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -26,13 +24,8 @@ public class GravatarRenderer extends Renderer {
 	public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
 		ResponseWriter writer = context.getResponseWriter();
 		Gravatar gravatar = (Gravatar) component;
-
-		String url = BASE_URL + getHash(gravatar.getEmail()) + "?d=" + URLEncoder.encode(gravatar.getDefault(), "UTF-8");
+		String url = getURL(gravatar);
 		int size = gravatar.getSize();
-
-		if (size != Gravatar.DEFAULT_SIZE) {
-			url += "&s=" + size;
-		}
 
 		writer.startElement("img", gravatar);
 		writer.writeAttribute("id", gravatar.getClientId(), "id");
